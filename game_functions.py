@@ -1,6 +1,7 @@
 import sys
 import pygame
 from bullet import Bullet
+# from ship import Ship
 
 
 def check_keydown_events(event, ai_settings, screen, ship, bullets):
