@@ -19,4 +19,7 @@ class Alien(Sprite):
 
     # Store the alien's exact position
     self.x = float(self.rect.x)
-    
+
+    def blitme(self):
+        #Draw the alien at it's current location
+        self.screen.blit(self.image, self.rect)

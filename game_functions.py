@@ -33,7 +33,7 @@ def check_events(ship):
         elif event.type == pygame.KEYUP:
             check_keyup_events(event, ship)
 
-def update_screen(ai_settings, screen, ship, bullets):
+def update_screen(ai_settings, screen, ship, aliens, bullets):
     # Redraw the screen, each pass through the loop.
     screen.fill(ai_settings.bg_color)
     
@@ -41,6 +41,16 @@ def update_screen(ai_settings, screen, ship, bullets):
     for bullet in bullets.sprites():
         bullet.draw_bullet()
     ship.blitme()
+    alien.blitme()
+    aliens.draw(screen)
+
+def create_fleet(ai_settings, screen, aliens):
+    alien = Alien(ai_settings, screen)
+    alien_width = alien.rect.width
+    available_space_x = ai_settings.screen_width - 2 * alien_width
+    number_aliens_x = int(available_space_x / (2 * alien_width))
+
+
 
     # Make the most recently drawn screen visible.
     pygame.display.flip()
