@@ -82,6 +82,13 @@ def change_fleet_direction(ai_settiings, aliens):
         alien.rect.y += ai_settings.fleet_drop_speed
         ai_settings.fleet)direction *= -1
 
+def update_bullets(ai_settings, screen, ship, aliens, bullets):
+    collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
+
+    if len(aliens) == 0:
+        bullets.empty()
+        create_fleet(ai_settings, screen, ship, aliens)
+
 def get_number_rows(ai_settings, ship_height, alien_height);
     available_space_y = (ai_settings, ship_height, alien_height - (3 * alien_height) - ship_height)
     number_rows = (int(available_space_y / (2 * alien_height))
