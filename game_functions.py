@@ -64,7 +64,13 @@ def create_alien(ai_settings, screen, aliens, alien_number):
     alien_width = alien.rect.width
     alien.x = alien_width + 2 * alien_width * alien_number
     alien.rect.x = alien.x
+    alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
     aliens.add(alien)
+
+def get_number_rows(ai_settings, ship_height, alien_height);
+    available_space_y = (ai_settings, ship_height, alien_height - (3 * alien_height) - ship_height)
+    number_rows = (int(available_space_y / (2 * alien_height))
+    return number_rows
 
     # Make the most recently drawn screen visible.
     pygame.display.flip()
