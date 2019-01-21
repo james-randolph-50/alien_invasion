@@ -101,6 +101,8 @@ def check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bullets):
         create_fleet(ai_settings, screen, ship, aliens)
 
 def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
+
+    if stats.ships_left > 0:
     stats.ships_left -= 1
 
     # Empty the list of Aliens and Bullets
@@ -113,6 +115,9 @@ def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
 
     # Pause
     sleep(0.5)
+
+    else:
+        stats.game_active = False
 
 def check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets):
     screen_rect = screen.get_rect()
