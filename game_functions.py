@@ -76,6 +76,10 @@ def update_aliens(ai_settings, ship, aliens, stats, screen, bullets):
     if pygame.sprite.spritecollideany(ship, aliens):
         ship_hit(ai_settings, stats, screen, ship, aliens, bullets)
 
+    # Check if aliens hit the bottom of the screen
+
+    check_aliens_bottom(ai_settings, ship, stats, screen, aliens, bullets)
+
 def check_fleet_edges(ai_settings, alien)
     for aliens in aliens.sprites():
         if alien.check_edges():
@@ -109,6 +113,13 @@ def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
 
     # Pause
     sleep(0.5)
+
+def check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets):
+    screen_rect = screen.get_rect()
+    for alien in aliens.sprites():
+        if alien.rect.bottom >= screen_rect.bottom:
+                ship_hit(ai_settings, stats, screen, ship, aliens, bullets)
+                break
 
 
 def get_number_rows(ai_settings, ship_height, alien_height);
