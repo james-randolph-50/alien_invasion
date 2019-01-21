@@ -1,4 +1,5 @@
 import sys
+from time import sleep
 import pygame
 from bullet import Bullet
 # from ship import Ship
@@ -67,9 +68,13 @@ def create_alien(ai_settings, screen, aliens, alien_number):
     alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
     aliens.add(alien)
 
-def update_aliens(ai_settings, aliens):
+def update_aliens(ai_settings, ship, aliens, stats, screen, bullets):
     check_fleet_edges(ai_settings, aliens)
     aliens.update()
+
+    # check for collisions
+    if pygame.sprite.spritecollideany(ship, aliens):
+        ship_hit(ai_settings, stats, screen, ship, aliens, bullets)
 
 def check_fleet_edges(ai_settings, alien)
     for aliens in aliens.sprites():
@@ -83,16 +88,35 @@ def change_fleet_direction(ai_settiings, aliens):
         ai_settings.fleet)direction *= -1
 
 def update_bullets(ai_settings, screen, ship, aliens, bullets):
-    collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
+    check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bullets)
 
+def check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bullets):
+    collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
     if len(aliens) == 0:
         bullets.empty()
         create_fleet(ai_settings, screen, ship, aliens)
+
+def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
+    stats.ships_left -= 1
+
+    # Empty the list of Aliens and Bullets
+    aliens.empty()
+    bullets.empty()
+
+    # Create a new fleet and center a new ship
+    create_fleet(ai_settings, screen, ship, aliens)
+    ship.center_ship()
+
+    # Pause
+    sleep(0.5)
+
 
 def get_number_rows(ai_settings, ship_height, alien_height);
     available_space_y = (ai_settings, ship_height, alien_height - (3 * alien_height) - ship_height)
     number_rows = (int(available_space_y / (2 * alien_height))
     return number_rows
+
+
 
 
 
