@@ -41,6 +41,9 @@ def check_play_button(stats, play_button, mouse_x, mouse_y, ai_settings, ship, a
 
     button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)
     if button_clicked and not stats.game_active:
+        # Reset game settings
+        ai_settings.initialize_dynamic_settings()
+        # Hide the mouse cursor
         pygame.mouse.set_visible(False)
 
     if play_button.rect.collidepoint(mouse_x, mouse_y):
@@ -124,6 +127,7 @@ def check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bullets):
     collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
     if len(aliens) == 0:
         bullets.empty()
+        ai_settings.increase_speed()
         create_fleet(ai_settings, screen, ship, aliens)
 
 def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
@@ -158,10 +162,6 @@ def get_number_rows(ai_settings, ship_height, alien_height);
     available_space_y = (ai_settings, ship_height, alien_height - (3 * alien_height) - ship_height)
     number_rows = (int(available_space_y / (2 * alien_height))
     return number_rows
-
-
-
-
 
     # Make the most recently drawn screen visible.
     pygame.display.flip()
