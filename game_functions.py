@@ -59,9 +59,12 @@ def check_play_button(stats, play_button, mouse_x, mouse_y, ai_settings, ship, a
     ship.center_ship()
 
 
-def update_screen(ai_settings, screen, ship, aliens, bullets):
+def update_screen(ai_settings, screen, ship, aliens, bullets, screen, stats, play_button):
     # Redraw the screen, each pass through the loop.
     screen.fill(ai_settings.bg_color)
+
+    # Draw the score information.
+    sb.show_score()
     
     # Redraw all bullets, behind ship and aliens.
     for bullet in bullets.sprites():
