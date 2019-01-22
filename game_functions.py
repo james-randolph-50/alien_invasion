@@ -25,7 +25,7 @@ def check_keyup_events(event, ship):
         elif event.key == pygame.K_LEFT:
             ship.moving_left = False
 
-def check_events(ship):
+def check_events(ai_settings, screen, stats, sb, play_button, ship, aliens, bullets):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
@@ -37,7 +37,7 @@ def check_events(ship):
             mouse_x, mouse_y = pygame.mouse.get_pos()
             check_play_button(ai_settings, screen, ship, bullets, aliens, stats, play_button, mouse_x, mouse_y)
         
-def check_play_button(stats, play_button, mouse_x, mouse_y, ai_settings, ship, aliens, bullets):
+def check_play_button(stats, play_button, mouse_x, mouse_y, ai_settings, ship, screen, aliens, bullets):
 
     button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)
     if button_clicked and not stats.game_active:
@@ -49,6 +49,11 @@ def check_play_button(stats, play_button, mouse_x, mouse_y, ai_settings, ship, a
     if play_button.rect.collidepoint(mouse_x, mouse_y):
         stats.reset_stats()
         stats.game_active = True
+
+        # Reset the scoreboard images
+        sb.prep_score()
+        sb.prep_high_score()
+        sb.prep_level()
 
     # Empty the list of aliens and bullets
         aliens.empty()
@@ -139,8 +144,14 @@ def check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bullets, st
         check_high_score(stats, sb)
 
     if len(aliens) == 0:
+        # If the entire fleet is destroyed, start a new level.
         bullets.empty()
         ai_settings.increase_speed()
+
+        # Increase level.
+        stats.level += 1
+        sb.prep_level()
+        
         create_fleet(ai_settings, screen, ship, aliens)
 
 def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
