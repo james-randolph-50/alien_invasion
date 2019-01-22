@@ -44,7 +44,7 @@ class Scoreboard():
         self.high_score_rect.centerx = self.screen_rect.centerx
         self.high_score_rect.top = self.score_rect.top
 
-    def prep_level(self)
+    def prep_level(self):
         """Turn the level into a rendered image."""
         self.level_image = self.font.render(str(self.stats.level), True, self.text_color, self.ai_settings.bg_color)
 
@@ -67,3 +67,5 @@ class Scoreboard():
         """Draw score to the screen."""
         self.screen.blit(self.score_image, self.score_rect)
         self.screen.blit(self.high_score_image, self.high_score_rect)
+        # Draw ships
+        self.ships.draw(self.screen)
