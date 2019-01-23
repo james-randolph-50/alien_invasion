@@ -1,6 +1,5 @@
 import pygame
 from pygame.sprite import Group
-
 from ship import Ship
 
 class Scoreboard():

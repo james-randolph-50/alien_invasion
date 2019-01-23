@@ -22,9 +22,6 @@ def run_game():
     # Create an instance to store game statistics and create a scoreboard
     stats = GameStats(ai_settings)
     sb = Scoreboard(ai_settings, screen, stats)
-
-    # Make an alien
-    alien = Alien(ai_settings, screen)
     
     # Set the background color.
     bg_color = (230, 230, 230)
