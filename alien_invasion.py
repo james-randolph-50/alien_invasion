@@ -45,9 +45,4 @@ def run_game():
 
         gf.update_screen(ai_settings, screen, ship, aliens, bullets, stats, sb, play_button)
 
-    # Remove bullets that fly off screen
-    for bullet in bullets.copy():
-            if bullet.rect.bottom <= 0:
-                bullets.remove(bullet)
-
 run_game()

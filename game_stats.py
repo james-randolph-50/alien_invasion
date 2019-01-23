@@ -1,8 +1,12 @@
 class GameStats():
+    """Track stats for Alien Invasion"""
 
     def __init__(self, ai_settings):
+        """Init stats"""
         self.ai_settings = ai_settings
         self.reset_stats()
+
+        # Start game in an inactive state.
         self.game_active = False
 
         # High score should never be reset.
